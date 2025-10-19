@@ -117,12 +117,5 @@ document.querySelectorAll(".faq-question").forEach((button) => {
     });
 })();
 
-// Example: Add click events to buttons if needed
-document.querySelectorAll('.pv-get-started').forEach(button => {
-  button.addEventListener('click', () => {
-    alert(`You clicked on ${button.closest('.pv-pricing-card').querySelector('.pv-plan-title').textContent}!`);
-  });
-});
-
 
 

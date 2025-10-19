@@ -1113,6 +1113,7 @@ footer {
     font-weight: 600;
     cursor: pointer;
     transition: 0.3s;
+    text-decoration: none;
 }
 
 .nexio-buy-btn:hover {
@@ -1373,6 +1374,7 @@ footer {
   color: #fff;
   background-color: var(--accent);
   transition: all 0.3s ease;
+  text-decoration: none;
 }
 
 .pv-get-started:hover {
