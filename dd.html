@@ -1,350 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nexio Card Order</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pricing Plans</title>
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
 body {
-    font-family: "Poppins", sans-serif;
-    background-color: #ffffff;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px;
+  font-family: "Poppins", sans-serif;
+  background-color: #ffffff;
+  margin: 0;
+  padding: 60px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
 }
 
-.order-section {
-    background-color: #0d1b4c;
-    border-radius: 20px;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
-    padding: 40px;
-    max-width: 900px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 40px;
+.pricing-card {
+  background: #fff;
+  width: 310px;
+  border-radius: 25px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.08);
+  overflow: hidden;
+  text-align: center;
+  position: relative;
+  transition: all 0.3s ease;
 }
 
-.section-title {
-    width: 100%;
-    text-align: center;
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 20px;
+.pricing-card:hover {
+  transform: translateY(-5px);
 }
 
-.card-container {
-    width: 325px;
-    height: 180px;
-    perspective: 1000px;
+.pricing-card .inner {
+  border: 1.5px solid #c7c7c7;
+  border-radius: 18px;
+  margin: 20px;
+  padding: 40px 25px 110px;
+  position: relative;
+  z-index: 2;
+  background: #fff;
 }
 
-.card {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    transform-style: preserve-3d;
-    transition: transform 0.8s;
-    cursor: pointer;
+.pricing-card::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 128px;
+  border-radius: 25px;
+  background-color: var(--accent);
 }
 
-.card.flipped {
-    transform: rotateY(180deg);
+.plan-title {
+  display: inline-block;
+  background: #f5f5f5;
+  border: 2px solid var(--accent);
+  border-radius: 25px;
+  padding: 8px 25px;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 10px;
 }
 
-.card-side {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 12px;
-    backface-visibility: hidden;
-     box-shadow: 0 15px 35px rgba(255, 255, 255, 0.4); /* darker, larger, more visible */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 20px;
-    font-weight: 600;
-    text-align: left;
-}
-
-
-.card:hover .card-side {
-    scale: 1.01;
-}
-
-.card-side.front {
-    background-color: #111;
-    color: white;
-}
-
-.card-side.back {
-    background-color: #111;
-    color: white;
-    transform: rotateY(180deg);
-    justify-content: center;
-    align-items: center;
-}
-
-.card-side.white {
-    background-color: white;
-    color: #0d1b4c;
-}
-
-.card-side.navy {
-    background-color: #0d1b4c;
-    color: white;
-}
-
-#cardName, #cardRole, #cardCompany {
-    text-transform: uppercase;
-}
-
-#cardName {
-    font-size: 18px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    margin-bottom: 10px;
-}
-
-#cardRole, #cardCompany {
-    font-size: 12px;
-    opacity: 0.85;
-    margin-bottom: 3px;
-}
-
-.card-logo {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    width: 55px;
-    opacity: 0.9;
-}
-
-.qr-front {
-    position: absolute;
-    bottom: 15px;
-    right: 15px;
-    width: 55px;
-    opacity: 0.9;
-}
-
-.qr-back {
-    width: 90px;
-    opacity: 0.95;
-    margin-bottom: 15px;
-}
-
-.website {
-    position: absolute;
-    bottom: 15px;
-    font-size: 12px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-}
-
-.color-options {
-    display: flex;
-    gap: 12px;
-    margin-top: 20px;
-}
-
-.color-dot {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    border: 2px solid #ccc;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.color-dot.white { background-color: white; }
-.color-dot.black { background-color: #111; }
-.color-dot.navy { background-color: #0d1b4c; }
-
-.color-dot.active {
-    outline: 3px solid #999;
-    transform: scale(1.1);
-}
-
-.order-form {
-    width: 45%;
-    min-width: 300px;
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-}
-
-.order-form input {
-    width: 100%;
-    padding: 12px;
-    border-radius: 10px;
-    border: none;
-    outline: none;
-    margin-top: 15px;
-    background-color: #f1f1f1;
-    color: #0d1b4c;
-    font-size: 14px;
-}
-
-.order-form input:focus {
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
-}
-
-.buy-btn {
-    margin-top: 25px;
-    width: 50%;
-    padding: 14px;
-    border: none;
-    border-radius: 10px;
-    background-color: white;
-    color: #0d1b4c;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.buy-btn:hover {
-    background-color: grey;
-    color: white;
-}
-
-.left {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 45%;
-    min-width: 300px;
+.plan-subtitle {
+  font-style: italic;
+  color: #777;
+  font-size: 14px;
+  margin-bottom: 25px;
 }
 
 .price {
-    margin-top: 15px;
-    font-size: 18px;
-    color: grey;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #000;
+}
+
+.price small {
+  font-size: 13px;
+  font-weight: 400;
+  color: #777;
+}
+
+.features {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.features li {
+  margin: 10px 0;
+  font-size: 14px;
+  color: #000;
+  font-weight: 500;
+}
+
+.get-started {
+  position: absolute;
+  white-space: nowrap;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 40px;
+  border-radius: 30px;
+  border: none;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  color: #fff;
+  background-color: var(--accent);
+  transition: all 0.3s ease;
+}
+
+.get-started:hover {
+  opacity: 0.9;
 }
 </style>
 </head>
+
 <body>
-<div class="order-section">
-    <div class="section-title">Design and Order Your <span style="color:white;">Nexio Card</span></div>
 
-    <div class="left">
-        <div class="card-container" id="cardContainer">
-            <div class="card" id="card">
-                <!-- FRONT SIDE -->
-                <div class="card-side front black" id="frontSide">
-                    <img src="logo-2.png" alt="Nexio Logo" class="card-logo" id="logoImg"/>
-                    <img src="qr-white.png" alt="QR Code" class="qr-front" id="qrFront"/>
-                    <div id="cardName">YOUR NAME</div>
-                    <div id="cardRole">ROLE</div>
-                    <div id="cardCompany">COMPANY</div>
-                </div>
-
-                <!-- BACK SIDE -->
-                <div class="card-side back black" id="backSide">
-                    <img src="qr-white.png" alt="QR Code" class="qr-back" id="qrBack"/>
-                    <div class="website" id="websiteText">www.nexiocard.com</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="price">LKR 3950</div>
-
-        <div class="color-options">
-            <div class="color-dot white" id="whiteDot"></div>
-            <div class="color-dot black active" id="blackDot"></div>
-            <div class="color-dot navy" id="navyDot"></div>
-        </div>
-    </div>
-
-    <div class="order-form">
-        <input type="text" id="nameInput" placeholder="* First name & Last name" maxlength="22">
-        <input type="text" id="roleInput" placeholder="* Role" maxlength="36">
-        <input type="text" id="companyInput" placeholder="Optional Company" maxlength="36">
-        <button class="buy-btn">BUY NOW</button>
-    </div>
+<!-- Starter -->
+<div class="pricing-card" style="--accent:#b0b0b0;">
+  <div class="inner">
+    <div class="plan-title">Starter</div>
+    <div class="plan-subtitle">Best for individuals</div>
+    <div class="price">Rs. 2500</div>
+    <ul class="features">
+      <li>1 Company Business Profile</li>
+      <li>1 Personal Digital Business Card</li>
+      <li>Unlimited Social Media Link</li>
+      <li>Premium Support</li>
+    </ul>
+    <button class="get-started">Get Started</button>
+  </div>
 </div>
 
-<script>
-const card = document.getElementById('card');
-const frontSide = document.getElementById('frontSide');
-const backSide = document.getElementById('backSide');
-const nameInput = document.getElementById('nameInput');
-const roleInput = document.getElementById('roleInput');
-const companyInput = document.getElementById('companyInput');
-const cardName = document.getElementById('cardName');
-const cardRole = document.getElementById('cardRole');
-const cardCompany = document.getElementById('cardCompany');
-const qrFront = document.getElementById('qrFront');
-const qrBack = document.getElementById('qrBack');
-const logoImg = document.getElementById('logoImg');
+<!-- Professional -->
+<div class="pricing-card" style="--accent:#2ba1f0;">
+  <div class="inner">
+    <div class="plan-title">Professional</div>
+    <div class="plan-subtitle">Great for small teams</div>
+    <div class="price">Rs. 3000</small></div>
+    <ul class="features">
+      <li>1 Company Business Profile</li>
+      <li>5 Personal Digital Business Cards</li>
+      <li>Unlimited Social Media Link</li>
+      <li>Premium Support</li>
+    </ul>
+    <button class="get-started">Get Started</button>
+  </div>
+</div>
 
-let flipTimer = null;
+<!-- Business Plus -->
+<div class="pricing-card" style="--accent:#0d1b4c;">
+  <div class="inner">
+    <div class="plan-title">Business Plus</div>
+    <div class="plan-subtitle">Perfect for higher companies</div>
+    <div class="price">Rs. 4500</div>
+    <ul class="features">
+      <li>1 Company Business Profile</li>
+      <li>Unlimited Personal Digital Business Card</li>
+      <li>Unlimited Social Media Link</li>
+      <li>Premium Support</li>
+    </ul>
+    <button class="get-started">Get Started</button>
+  </div>
+</div>
 
-// Flip on click
-card.addEventListener('click', () => {
-    card.classList.toggle('flipped');
-    resetAutoFlipTimer();
-});
-
-// Reset timer to auto-flip back after 3 seconds
-function resetAutoFlipTimer() {
-    if (flipTimer) clearTimeout(flipTimer);
-    if (card.classList.contains('flipped')) {
-        flipTimer = setTimeout(() => {
-            card.classList.remove('flipped');
-        }, 3000);
-    }
-}
-
-// If mouse held down, cancel auto flip
-card.addEventListener('mousedown', () => {
-    if (flipTimer) clearTimeout(flipTimer);
-});
-card.addEventListener('mouseup', resetAutoFlipTimer);
-
-// Update text inputs
-nameInput.addEventListener('input', () => {
-    cardName.textContent = (nameInput.value || "YOUR NAME").toUpperCase();
-});
-const updateRoleCompany = () => {
-    cardRole.textContent = (roleInput.value || "ROLE").toUpperCase();
-    cardCompany.textContent = (companyInput.value || "COMPANY").toUpperCase();
-};
-roleInput.addEventListener('input', updateRoleCompany);
-companyInput.addEventListener('input', updateRoleCompany);
-
-// Handle color themes
-const colorDots = {
-    white: document.getElementById('whiteDot'),
-    black: document.getElementById('blackDot'),
-    navy: document.getElementById('navyDot')
-};
-
-Object.entries(colorDots).forEach(([color, dot]) => {
-    dot.addEventListener('click', () => {
-        Object.values(colorDots).forEach(d => d.classList.remove('active'));
-        dot.classList.add('active');
-        frontSide.className = `card-side front ${color}`;
-        backSide.className = `card-side back ${color}`;
-
-        // Change assets by color
-        if (color === 'white') {
-            logoImg.src = 'logo-2-black.png';
-            qrFront.src = 'qr-black.png';
-            qrBack.src = 'qr-black.png';
-        } else {
-            logoImg.src = 'logo-2.png';
-            qrFront.src = 'qr-white.png';
-            qrBack.src = 'qr-white.png';
-        }
-    });
-});
-</script>
 </body>
 </html>

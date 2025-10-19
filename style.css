@@ -271,7 +271,7 @@ header {
 
 /* Pricing Section */
 #pricing {
-    padding: 80px 50px;
+    padding: 40px 50px;
     text-align: center;
 }
 
@@ -1133,5 +1133,253 @@ footer {
     font-size: 18px;
     color: grey;
 }
+
+  .compare-section {
+    background-color: #0d1b4c;
+    color: white;
+    padding: 80px 20px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .compare-container {
+    max-width: 1000px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .compare-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #ffffff;
+  }
+
+  .compare-subtitle {
+    font-size: 1rem;
+    margin-bottom: 40px;
+    color: #d0d0d0;
+  }
+
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    display: table;
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    color: #222;
+  }
+
+  .comparison-header {
+    display: table-row;
+    background-color: #0d1b4c;
+    color: white;
+    font-weight: 700;
+  }
+
+  .comparison-row {
+    display: table-row;
+    transition: background-color 0.3s;
+  }
+
+  .comparison-row:nth-child(even) {
+    background-color: #f5f5f5;
+  }
+
+  .comparison-cell {
+    display: table-cell;
+    padding: 15px 20px;
+    border-bottom: 1px solid #ddd;
+    vertical-align: middle;
+  }
+
+  .comparison-cell.feature {
+    font-weight: 600;
+    color: #0d1b4c;
+  }
+
+  .comparison-cell.nexio {
+    font-weight: 600;
+    color: #0d1b4c;
+    background-color: #f0f6ff;
+  }
+
+  .comparison-row:hover {
+    background-color: #e8f0ff;
+  }
+
+  .compare-footer {
+    margin-top: 40px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #f2f2f2;
+  }
+
+  .compare-footer .highlight {
+    color: #58a6ff;
+    font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    .comparison-header, .comparison-row {
+      display: block;
+    }
+
+    .comparison-cell {
+      display: block;
+      text-align: left;
+      padding: 10px;
+    }
+
+    .comparison-cell.feature {
+      background-color: #0d1b4c;
+      color: white;
+    }
+
+    .comparison-cell.nexio {
+      background-color: #f0f6ff;
+    }
+  }
+
+
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+.pv-pricing-wrapper {
+  font-family: "Poppins", sans-serif;
+  /* background-color: #ffffff; */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.pv-pricing-card {
+  background: #fff;
+  width: 310px;
+  border-radius: 25px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.08);
+  overflow: hidden;
+  text-align: center;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.pv-pricing-card:hover {
+  transform: translateY(-5px);
+}
+
+.pv-pricing-card .pv-inner {
+  border: 1.5px solid #c7c7c7;
+  border-radius: 18px;
+  margin: 20px;
+  padding: 40px 25px 110px;
+  position: relative;
+  z-index: 2;
+  background: #fff;
+}
+
+.pv-pricing-card::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 128px;
+  border-radius: 25px;
+  background-color: var(--accent);
+}
+
+.pv-plan-title {
+  display: inline-block;
+  background: #f5f5f5;
+  border: 2px solid var(--accent);
+  border-radius: 25px;
+  padding: 8px 25px;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 10px;
+}
+
+.pv-plan-subtitle {
+  font-style: italic;
+  color: #777;
+  font-size: 14px;
+  margin-bottom: 25px;
+}
+
+.pv-price {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #000;
+}
+
+.pv-price small {
+  font-size: 13px;
+  font-weight: 400;
+  color: #777;
+}
+
+.pv-features {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+  text-align: left;
+}
+
+.pv-features li {
+  margin: 10px 0;
+  font-size: 14px;
+  color: #000;
+  font-weight: 500;
+}
+
+.pv-features li.feature-yes::before {
+  content: "✓"; /* Check mark */
+  margin-left: 5px;
+  position: absolute;
+  left: 0;
+  color: green; /* Green for included features */
+  font-weight: bold;
+}
+
+.pv-features li.feature-no::before {
+  content: "✗"; /* Cross mark */
+  margin-left: 5px;
+  position: absolute;
+  left: 0;
+  color: grey; /* Grey for unavailable features */
+  font-weight: bold;
+}
+
+
+.pv-get-started {
+  position: absolute;
+  white-space: nowrap; /* Prevent text wrap */
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 40px;
+  border-radius: 30px;
+  border: none;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  color: #fff;
+  background-color: var(--accent);
+  transition: all 0.3s ease;
+}
+
+.pv-get-started:hover {
+  opacity: 0.9;
+}
+
+
+
 
 
